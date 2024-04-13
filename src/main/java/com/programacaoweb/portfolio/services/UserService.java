@@ -37,5 +37,10 @@ public class UserService {
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
-	
+	/*
+	 * Excluir registro:
+	 */
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
