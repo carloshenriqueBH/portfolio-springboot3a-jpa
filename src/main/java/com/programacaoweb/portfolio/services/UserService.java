@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.programacaoweb.portfolio.entities.User;
 import com.programacaoweb.portfolio.repositories.UserRepository;
+import com.programacaoweb.portfolio.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository repository;
-	
+
 	/*
 	 * localizar todos os registros no BD:
 	 */
@@ -25,24 +26,27 @@ public class UserService {
 	/*
 	 * Localizar qualquer registro pela sua PK:
 	 */
-	
+
 	public User findById(Long id) {
-		
+
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
+
 	/*
 	 * Inserir registro:
 	 */
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
+
 	/*
 	 * Excluir registro:
 	 */
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+
 	/*
 	 * Alteração de registro:
 	 *
@@ -52,6 +56,7 @@ public class UserService {
 		updateData(entity, obj);
 		return repository.save(entity);
 	}
+
 	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
