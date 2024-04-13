@@ -11,28 +11,28 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable{
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String phone;
 	private String email;
+	private String phone;
 	private String password;
-	
+
 	public User() {
-		
+
 	}
 
-	public User(Long id, String name, String phone, String email, String password) {
+	public User(Long id, String name, String email, String phone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.phone = phone;
 		this.email = email;
+		this.phone = phone;
 		this.password = password;
 	}
 
@@ -52,13 +52,7 @@ public class User implements Serializable{
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+	
 
 	public String getEmail() {
 		return email;
@@ -67,7 +61,13 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -78,7 +78,7 @@ public class User implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, name, password, phone);
+		return Objects.hash(id, name, email, password, phone);
 	}
 
 	@Override
@@ -93,6 +93,5 @@ public class User implements Serializable{
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(phone, other.phone);
 	}
-	
-	
+
 }
